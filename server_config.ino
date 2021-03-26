@@ -15,6 +15,7 @@
 #endif
 
 
+#include "/home/userone/Arduino/simple_node_webserver/index.h"
 
 #include <ESPAsyncWebServer.h>
 
@@ -47,11 +48,12 @@ Serial.println(WiFi.softAPIP());  //Return Access Point IP address in Serial
 
 
 
-  server.on("/", [](AsyncWebServerRequest * request)  // Webserver created at home.local return helo world
-  { 
+
+  server.on("/", [](AsyncWebServerRequest * request) // Webserver created at home.local return helo world
+  {
     
-   String message = "hello world"; 
-  request->send(200, "text/plain", message);
+   String index = INDEX_page;   // Reads the HTML code from defined in index.h
+  request->send(200, "text/html", index); //  Displays code from index.h
   });
 
    server.on("/page1", HTTP_GET, [](AsyncWebServerRequest * request)
